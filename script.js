@@ -30,21 +30,33 @@ function addBook(e) {
     document.forms[0].reset();
 
     localStorage.setItem('MyLibrary', JSON.stringify(myLibrary));
+}
 
-    let obj = localStorage.getItem('MyLibrary');
-
-    for (var i = 0; i < obj.length; i++) {
-        var tr = "<tr>";
-    
-        /* Must not forget the $ sign */
-        tr += "<td>" + obj[i].key + "</td>" + "<td>$" + obj[i].value.toString() + "</td></tr>";
-    
-        /* We add the table row to the table body */
-        tbody.innerHTML += tr;
+function makeTable() {
+    const rows = JSON.parse(localStorage.getItem('MyLibrary'));
+    let html = '<table>';
+    html += '<tr>';
+    for(let j in rows[0]) {
+        if(j != 'id') {
+            html += '<th>' + j + '</th>';
+        }
     }
+    html += '</tr>';
+    for(let i = 0; i < rows.length; i++) {
+        html += '<tr>';
+        for(let j in rows[i]) {
+            if(j != 'id') {
+                html += '<td>' + rows[i][j] + '</td>';
+            }
+        }
+        html += '</tr>';
+    }
+    html += '</table>';
+    document.getElementById('container').innerHTML = html;
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('submitBtn').addEventListener('click', addBook)
+    document.getElementById('submitBtn').addEventListener('click', makeTable)
 })
