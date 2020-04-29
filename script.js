@@ -11,7 +11,7 @@ function Book(title, author, pages, haveRead) {
 }
 
 function loadStorage() {
-    parsedData = myLibrary;
+    let parsedData = myLibrary;
     return parsedData;
 }
 
@@ -29,6 +29,11 @@ function getRadioValue() {
     }
 }
 
+function updateBook(book) {
+    myLibrary.push(book);
+    storeLocal();
+}
+
 function addBook(e) {
     e.preventDefault();
     let bookTitle = document.getElementById('title').value;
@@ -36,9 +41,9 @@ function addBook(e) {
     let bookPages = document.getElementById('numPages').value;
     let bookRead = getRadioValue();
     let newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
-    myLibrary.push(newBook);
+    updateBook(newBook);
     document.forms[0].reset();
-    storeLocal();
+    draw();
 }
 
 function draw() {
@@ -69,16 +74,42 @@ function draw() {
                 html += '<td>' + obj[i][j] + '</td>';
             }
         }
+        html += '<td> <button id =' + obj[i].id + ' class = "deleteBtn">Delete</button>' 
         html += '</tr>';
     }
     html += '</table>';
     document.getElementById('container').innerHTML = html;
+    addDeleteClickEvent();
 }
 
+function deleteId() {
+   let obj = myLibrary;
+   alert(this.id)
+   for(let i = 0; i < obj.length; i++){
+       if(obj[i].id != this.id){
+           console.log(myLibrary)
+           continue;
+        } else {
+            obj.splice(i, 1);
+            storeLocal();
+            draw();
+            console.log(myLibrary)
+        }
+    }
+    
+};
+
+function addDeleteClickEvent() {
+    let elements = document.getElementsByClassName('deleteBtn');
+    
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].addEventListener('click', deleteId)
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('submitBtn').addEventListener('click', addBook)
-    document.getElementById('submitBtn').addEventListener('click', draw)
+   
 })
 
 draw();
