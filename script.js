@@ -61,9 +61,9 @@ function draw() {
         for(let j in obj[i]) {
             if(j == 'haveRead') {
                 if(obj[i].haveRead == 'yes'){
-                    html += '<td>' + '<select id = "readStatus"><option value = "yes" selected>Yes</option><option value = "no">No</option></select>';
+                    html += '<td>' + '<select id =' + obj[i].id + ' class = "readStatus"><option value = "yes" selected>Yes</option><option value = "no">No</option></select>';
                 } else {
-                    html += '<td>' + '<select id = "readStatus"><option value = "yes">Yes</option><option value = "no" selected>No</option></select>';
+                    html += '<td>' + '<select id =' + obj[i].id + ' class = "readStatus"><option value = "yes">Yes</option><option value = "no" selected>No</option></select>';
                 }
                 
             } 
@@ -80,30 +80,49 @@ function draw() {
     html += '</table>';
     document.getElementById('container').innerHTML = html;
     addDeleteClickEvent();
+    addReadSelectionEvent();
 }
 
 function deleteId() {
    let obj = myLibrary;
-   alert(this.id)
    for(let i = 0; i < obj.length; i++){
        if(obj[i].id != this.id){
-           console.log(myLibrary)
            continue;
         } else {
             obj.splice(i, 1);
             storeLocal();
             draw();
-            console.log(myLibrary)
         }
     }
     
 };
+
+function updateReadStatus() {
+    let obj = myLibrary;
+    for(let i = 0; i < obj.length; i++) {
+        if(obj[i].id != this.id) {
+            continue;
+        } else {
+            obj[i].haveRead = this.options[this.selectedIndex].value;
+            storeLocal();
+            draw();
+        }
+    }
+}
 
 function addDeleteClickEvent() {
     let elements = document.getElementsByClassName('deleteBtn');
     
     for (let i = 0; i < elements.length; i++) {
         elements[i].addEventListener('click', deleteId)
+    }
+}
+
+function addReadSelectionEvent() {
+    let elements = document.getElementsByClassName('readStatus');
+    
+    for(let i = 0; i < elements.length; i++) {
+        elements[i].addEventListener('change', updateReadStatus)
     }
 }
 
