@@ -4,6 +4,7 @@
 <head>
     <title>Library</title>
     <meta charset='UTF-8'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <h1>My Reading List</h1>
@@ -14,11 +15,13 @@
         <input type = "text" name = "author" id = "author" placeholder = 'Author' required>
         <label for = "numPages">Number of Pages: </label>
         <input type = "number" name = "numPages" id = "numPages" placeholder = '# of Pages' required>
-        <label for = "haveRead">Have you read this book? </label>
-        <input type = "radio" name = "haveRead" value = "yes" default>
-        <label for = "yes">Yes</label>
-        <input type = "radio" name = "haveRead" value = "no">
-        <label for = "no">No</label>
+        <div id = "radioWrap">
+            <label for = "haveRead">Have you read this book? </label>
+            <input type = "radio" name = "haveRead" value = "yes" default>
+            <label for = "yes">Yes</label>
+            <input type = "radio" name = "haveRead" value = "no">
+            <label for = "no">No</label>
+        </div>
         <button type= "button" id = "submitBtn">Add Book</button>
     </form>
 

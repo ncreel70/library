@@ -1,15 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
+* {
+  font-family: 'Noto Serif', Ariel;
+}
+body {
+  display: grid;
+  background-color: #fbfbf8;
+}
+#container {
+  display: grid;
+}
+form {
+  display: grid;
+  justify-self: center;
+  padding: 10px;
+  width: 50%;
+}
+
 table {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    border: 3px solid purple;
-  }
+  justify-self: center;
+  table-layout: fixed;
+  width: 75%;
+  border-collapse: collapse;
+  border: 3px solid;
+}
 
-  th, td {
-    padding: 20px;
-    text-align: center;
-  }
+#radioWrap {
+  grid-template-columns: 1fr 1fr;
+}
 
-  h1 {
-    text-align: center;
-  }
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+.deleteBtn {
+  height: 25px;
+  width: 25px;
+  align-items: center;
+  border-radius: 50%;
+  padding: 2px;
+  color: #D11A2A;
+  border-color: #D11A2A;
+  background-color: black;
+}

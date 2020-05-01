@@ -50,11 +50,10 @@ function draw() {
     const obj = loadStorage();
     let html = '<table>';
     html += '<tr>';
-    for(let j in obj[0]) {
-        if(j != 'id') {
-            html += '<th>' + j + '</th>';
-        }
-    }
+    html += '<th>Title</th>';
+    html += '<th>Author</th>';
+    html += '<th>Pages</th>';
+    html += '<th>Read?</th>';
     html += '</tr>';
     for(let i = 0; i < obj.length; i++) {
         html += '<tr>';
@@ -74,7 +73,7 @@ function draw() {
                 html += '<td>' + obj[i][j] + '</td>';
             }
         }
-        html += '<td> <button id =' + obj[i].id + ' class = "deleteBtn">Delete</button>' 
+        html += '<td> <button id =' + obj[i].id + ' class = "deleteBtn fa fa-close"></button>' 
         html += '</tr>';
     }
     html += '</table>';
@@ -124,7 +123,7 @@ function addReadSelectionEvent() {
     for(let i = 0; i < elements.length; i++) {
         elements[i].addEventListener('change', updateReadStatus)
     }
-}
+}  
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('submitBtn').addEventListener('click', addBook)
